@@ -1,3 +1,4 @@
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 // LOADER
 window.addEventListener("load",()=>{
   const loader=document.querySelector(".loader");
@@ -31,16 +32,18 @@ function animateScroll(){
   }
 }
 
-window.addEventListener("wheel", e=>{
-  target += e.deltaY;
-  target = Math.max(0, Math.min(target, document.body.scrollHeight - window.innerHeight));
+if(!isMobile){
+  window.addEventListener("wheel", e=>{
+    target += e.deltaY;
+    target = Math.max(0, Math.min(target, document.body.scrollHeight - window.innerHeight));
 
-  if(!isScrolling){
-    isScrolling = true;
-    document.body.classList.add("scrolling");
-    requestAnimationFrame(animateScroll);
-  }
-});
+    if(!isScrolling){
+      isScrolling = true;
+      document.body.classList.add("scrolling");
+      requestAnimationFrame(animateScroll);
+    }
+  });
+}
 
 
 // =======================================
@@ -103,5 +106,6 @@ const observer=new IntersectionObserver(entries=>{
     }
   });
 },{threshold:0.3});
+
 
 reveals.forEach(r=>observer.observe(r));
