@@ -1,0 +1,282 @@
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --bg:#0c0c0f;
+  --text:#f3f3f3;
+  --muted:#9a9a9a;
+  --accent:#c6a75e;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* LOADER */
+.loader{
+  position:fixed;
+  inset:0;
+  background:#0c0c0f;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  transition:0.8s ease;
+}
+.loader-bar{
+  width:0;
+  height:2px;
+  background:var(--accent);
+  animation:loading 1.6s ease forwards;
+}
+@keyframes loading{
+  to{width:220px;}
+}
+
+/* NAVBAR */
+.navbar{
+  position:fixed;
+  width:100%;
+  padding:30px 8%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:100;
+}
+
+.logo{
+  font-size:14px;
+  letter-spacing:3px;
+  font-weight:600;
+  text-transform:uppercase;
+}
+
+.nav-links{
+  display:flex;
+  gap:40px;
+  align-items:center;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:var(--muted);
+  font-size:14px;
+  transition:0.3s;
+}
+.nav-links a:hover{
+  color:var(--text);
+}
+
+.nav-btn{
+  padding:10px 20px;
+  border:1px solid var(--accent);
+  border-radius:50px;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.hero video{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(0.35);
+  transition:0.3s ease;
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.8));
+}
+
+.hero-light{
+  position:absolute;
+  width:150%;
+  height:150%;
+  background:radial-gradient(circle,
+    rgba(198,167,94,0.25),
+    transparent 60%);
+  animation:lightMove 12s infinite alternate ease-in-out;
+}
+@keyframes lightMove{
+  from{transform:translate(-5%,-5%) scale(1);}
+  to{transform:translate(5%,5%) scale(1.1);}
+}
+
+.grain{
+  position:absolute;
+  inset:0;
+  background:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:0.05;
+  pointer-events:none;
+}
+
+.hero-content{
+  position:relative;
+  text-align:center;
+  max-width:900px;
+  padding:0 20px;
+}
+
+.hero-tag{
+  font-size:12px;
+  letter-spacing:4px;
+  color:var(--accent);
+}
+
+.hero h1{
+  font-size:clamp(52px,7vw,100px);
+  font-weight:900;
+  line-height:1.05;
+  margin:20px 0;
+  animation:fadeUp 1s ease forwards;
+  opacity:0;
+  transform:translateY(40px);
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:18px;
+  margin-bottom:40px;
+  animation:fadeUp 1.3s ease forwards;
+  opacity:0;
+  transform:translateY(40px);
+}
+
+.hero-cta{
+  padding:18px 50px;
+  background:var(--accent);
+  color:#000;
+  text-decoration:none;
+  border-radius:50px;
+  font-weight:600;
+  transition:0.3s;
+}
+.hero-cta:hover{
+  transform:translateY(-5px);
+  box-shadow:0 20px 50px rgba(198,167,94,0.5);
+}
+
+/* ABOUT */
+.about{
+  padding:180px 8%;
+}
+.about-grid{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:100px;
+}
+.section-tag{
+  font-size:12px;
+  letter-spacing:4px;
+  color:var(--accent);
+}
+.about h2{
+  font-size:48px;
+  margin-top:20px;
+}
+.about p{
+  color:var(--muted);
+  line-height:1.8;
+  font-size:18px;
+}
+
+/* STATS */
+.stats{
+  padding:160px 8%;
+  display:flex;
+  justify-content:center;
+  gap:120px;
+}
+.stat{
+  text-align:center;
+}
+.number{
+  font-size:60px;
+  font-weight:900;
+  color:var(--accent);
+}
+
+/* REVEAL */
+.reveal{
+  opacity:0;
+  transform:translateY(50px);
+  transition:1s ease;
+}
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* FOOTER */
+footer{
+  padding:80px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+}
+
+@keyframes fadeUp{
+  to{opacity:1;transform:translateY(0);}
+}
+
+html{
+  scroll-behavior: auto;
+}
+
+body{
+  scroll-behavior: auto;
+}
+
+/* ============================= */
+/* PREMIUM SCROLL DEPTH EFFECT */
+/* ============================= */
+
+body.smooth-active .hero video{
+  transition: transform 0.2s ease-out;
+}
+
+body.scrolling .hero{
+  transform: scale(0.985);
+  transition: transform 0.4s ease;
+}
+
+body{
+  transition: transform 0.4s ease;
+}
+
+/* NAVBAR GLASS EFFECT */
+
+.navbar{
+  backdrop-filter: blur(0px);
+  transition: backdrop-filter 0.4s ease, background 0.4s ease;
+}
+
+.navbar.scrolled{
+  backdrop-filter: blur(12px);
+  background: rgba(12,12,15,0.6);
+}
+
+/* SECTION CINEMATIC FADE */
+
+section{
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.fade-out{
+  opacity:0.4;
+  transform:scale(0.98);
+}
